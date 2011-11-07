@@ -30,6 +30,7 @@
 
     <modules>
         <module>hello-world-java</module>
+        <module>hello-world-groovy</module>
     </modules>
 
     <licenses>
