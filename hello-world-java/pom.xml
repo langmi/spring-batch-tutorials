@@ -28,20 +28,16 @@
 
     <name>hello-world-java</name>
     <url>https://github.com/langmi/spring-batch-tutorials</url>
-    <description>Spring Batch Hello World! Example</description>
+    <description>Spring Batch Hello World! Tutorial</description>
 
 
     <properties>
-        <!-- compiler settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.jdk>1.6</maven.jdk>
+        <!-- maven-compiler-plugin settings -->
+        <maven.compiler.jdk>1.6</maven.compiler.jdk>
         <maven.compiler.debug>true</maven.compiler.debug>
         <maven.compiler.optimize>false</maven.compiler.optimize>
-        <!-- test settings -->
-        <maven.surefire.forkmode>always</maven.surefire.forkmode>
-        <!-- logging -->
-        <log4j.configuration>log4j/log4j.properties</log4j.configuration>
-        <!-- often used dependency version data -->
+        <!-- re-used dependency version data -->
         <spring.batch.version>2.1.8.RELEASE</spring.batch.version>
         <spring.framework.version>3.0.6.RELEASE</spring.framework.version>
     </properties>
@@ -52,8 +48,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>${maven.jdk}</source>
-                    <target>${maven.jdk}</target>
+                    <source>${maven.compiler.jdk}</source>
+                    <target>${maven.compiler.jdk}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <debug>${maven.compiler.debug}</debug>
                     <optimize>${maven.compiler.optimize}</optimize>
@@ -67,18 +63,35 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-<!--            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <systemPropertyVariables>
-                        <log4j.configuration>${log4j.configuration}</log4j.configuration>
-                    </systemPropertyVariables>
-                    <forkMode>${maven.surefire.forkmode}</forkMode>
-                    <argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
-                </configuration>
-            </plugin>-->
-        </plugins>
+            <plugin>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.springframework.batch.core.launch.support.CommandLineJobRunner</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                            </transformers>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <!-- optional -->
+                            <shadedClassifierName>executable</shadedClassifierName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>        
     </build>
     <dependencies>
         <!-- Spring (core) Framework dependencies -->
@@ -90,6 +103,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
             <version>${spring.framework.version}</version>
         </dependency>
         <!-- Spring Batch dependencies -->
