@@ -64,6 +64,14 @@
                 </configuration>
             </plugin>
             <plugin>
+                <!-- create an all-in-one executable jar with maven-shade-plugin
+                     bound to phase:package 
+                     special handling for spring.handlers/spring.schemas files
+                     to prevent overwriting (maven-shade-plugin joins them to
+                     one file) 
+                     
+                     usage:
+                     java -jav hello-world-groovy-1.0-SNAPSHOT-executable.jar spring\batch\job\hello-word-job.xml helloWorldJob -->
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>1.5</version>
                 <executions>
