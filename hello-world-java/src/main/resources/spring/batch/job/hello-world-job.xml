@@ -22,8 +22,10 @@
     <description>
         Simple Spring Batch Configuration
         
-        - one step
+        - one tasklet step
           - prints out "Hello World!"
+        - setup without database, uses in-memory JobRepository
+        - not restartable
     </description>
     <!-- 
         inline xmlns, otherwise it would look like 

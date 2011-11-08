@@ -21,15 +21,24 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 
 /**
- * Tasklet(step) which prints out a friendly "Hello World!".
+ * This is a Tasklet(step) implementation which prints out a friendly "Hello World!".
+ * 
+ * In Spring Batch a Taskletstep is a simplified version of a Step,
+ * without the chunk-oriented processing.
  *
  * @author Michael R. Lange <michael.r.lange@langmi.de>
+ * @see <a href="http://static.springsource.org/spring-batch/reference/html/configureStep.html#taskletStep">TaskletStep</a>
+ * @see <a href="http://static.springsource.org/spring-batch/reference/html/domain.html#domainStep">Step</a>
+ * @see <a href="http://static.springsource.org/spring-batch/reference/html/configureStep.html#chunkOrientedProcessing">chunk-oriented processing</a>
  */
 public class HelloWorldTasklet implements Tasklet {
 
+    /** {@inheritDoc} */
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+
         System.out.println("Hello World!");
+
         return RepeatStatus.FINISHED;
     }
 }
