@@ -10,15 +10,20 @@ If you are in a hurry or just the code-first type, you can jump right to the sou
 
 ## How to setup a simple Spring Batch program?
 
-The setup of a Spring Batch program mostly consists of 3 parts:
+The setup of a Spring Batch program roughly consists of 3 parts:
 
-* [project setup](#project-setup)
+* project setup
 * Spring Batch infrastructure
 * Spring Batch Job
 
-### Project Setup<a id="project-setup"></a>
-#### Maven
+### Project Setup
+
+#### Buildr
+
+[Buildr][buildr] is a rather new build system, well actually i think it's a bit exotic to use Ruby to create a build management software for java projects. Anyway here is the configuration to get the project running: ... to be documented ...
+
 #### Gradle
+
 #### IDE specific Project Setups
 
 To create a project with your favourite IDE, please follow the links to the appropiate documentation.
@@ -26,6 +31,8 @@ To create a project with your favourite IDE, please follow the links to the appr
 * [Eclipse][eclipse-help]
 * [Intelli J IDEA project setup][intellij-idea-project-setup]
 * [Netbeans project setup][netbeans-project-setup]
+
+#### Maven
 
 #### Which Java Libraries are needed?
 
@@ -132,6 +139,7 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 
 [accenture]: http://www.accenture.com/ "Accenture official home page"
 [apache-license]: http://www.apache.org/licenses/LICENSE-2.0.txt "Apache 2.0 License"
+[buildr]: http://buildr.apache.org/ "Buildr official home page"
 [changes-1-to-2]: http://static.springsource.org/spring-batch/trunk/migration/2.0-highlights.html "Changes from Spring Batch 1.x to 2.0"
 [eclipse-help]: http://www.eclipse.org/documentation/ "Eclipse: Starting Point for Documentation"
 [github-repo]: https://github.com/langmi/spring-batch-tutorials "My Github Repository for Spring Batch Tutorials Sources"
