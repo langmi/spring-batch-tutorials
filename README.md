@@ -1,4 +1,4 @@
-# Spring Batch Examples
+# Spring Batch Tutorials
 
 Collection of Spring Batch Tutorials.
 
