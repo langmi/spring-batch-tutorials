@@ -134,6 +134,12 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
+                                    <!-- right now the plugin works accepts
+                                         the version as lowest allowed
+                                         so there is no need to use fancy formats
+                                         see http://maven.apache.org/plugins/maven-enforcer-plugin/rules/versionRanges.html
+                                         like: [1.0,)
+                                         -->
                                     <version>3.0.0</version>
                                 </requireMavenVersion>
                             </rules>    
