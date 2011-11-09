@@ -121,7 +121,7 @@ For Maven users i provided the complete dependency configuration:
 	</dependencies>
 ```
 
-## Run Batch Job Run!
+## Run Batch Job, Run!
 
 
 We have some possibilities to run the job:
