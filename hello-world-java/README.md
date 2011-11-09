@@ -4,13 +4,22 @@
 
 In this tutorial, we will create a simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] and learn some basics for this amazing framework.
 
-## How to setup a simple Spring Batch project?
+## For the Impatient
 
+If you are in a hurry or just the code-first type, you can jump right to the source on [my github repository][github-repo].
 
+## How to setup a simple Spring Batch program?
 
-### Maven
-### Gradle
-### IDE specific Project Setups
+The setup of a Spring Batch program mostly consists of 3 parts:
+
+* [project setup](#project-setup)
+* Spring Batch infrastructure
+* Spring Batch Job
+
+### <a id="project-setup">Project Setup</a>
+#### Maven
+#### Gradle
+#### IDE specific Project Setups
 
 To create a project with your favourite IDE, please follow the links to the appropiate documentation.
 
@@ -18,7 +27,7 @@ To create a project with your favourite IDE, please follow the links to the appr
 * [Intelli J IDEA project setup][intellij-idea-project-setup]
 * [Netbeans project setup][netbeans-project-setup]
 
-### Which Java Libraries are needed?
+#### Which Java Libraries are needed?
 
 Each entry in this library list follows the pattern `<library>:<version>`. List is produced with Maven Plugin and command `dependency:list`.
 
@@ -125,6 +134,7 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 [apache-license]: http://www.apache.org/licenses/LICENSE-2.0.txt "Apache 2.0 License"
 [changes-1-to-2]: http://static.springsource.org/spring-batch/trunk/migration/2.0-highlights.html "Changes from Spring Batch 1.x to 2.0"
 [eclipse-help]: http://www.eclipse.org/documentation/ "Eclipse: Starting Point for Documentation"
+[github-repo]: https://github.com/langmi/spring-batch-tutorials "My Github Repository for Spring Batch Tutorials Sources"
 [hello-world]: http://en.wikipedia.org/wiki/Hello_world_program "Wikipedia: Hello World Programm"
 [intellij-idea-project-setup]: http://www.jetbrains.com/idea/webhelp/creating-new-project-from-scratch.html "Intelli J IDEA: Creating New Project From Scratch"
 [first-introduction]: http://forum.springsource.org/showthread.php?38417-Spring-Batch-Announcement "first Spring Batch announcement from 2007"
