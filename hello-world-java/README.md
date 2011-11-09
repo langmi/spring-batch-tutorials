@@ -16,7 +16,7 @@ The setup of a Spring Batch program mostly consists of 3 parts:
 * Spring Batch infrastructure
 * Spring Batch Job
 
-### <a id="project-setup">Project Setup</a>
+### Project Setup<a id="project-setup"></a>
 #### Maven
 #### Gradle
 #### IDE specific Project Setups
