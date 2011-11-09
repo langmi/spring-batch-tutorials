@@ -24,7 +24,15 @@
 
     <name>hello-world-java</name>
     <url>https://github.com/langmi/spring-batch-tutorials</url>
-    <description>A simple Spring Batch "Hello World!" tutorial.</description>
+    <description>
+        A simple Spring Batch "Hello World!" tutorial.
+        This projects needs:
+        
+        * Java 1.5+
+        * Maven 3+
+        
+        see maven-enforcer-plugin configuration.
+    </description>
 
     <licenses>
         <license>
@@ -91,7 +99,9 @@
                      one file) 
                      
                      usage:
-                     java -jav hello-world-groovy-1.0-SNAPSHOT-executable.jar spring\batch\job\hello-word-job.xml helloWorldJob -->
+                     cd to <project>/target
+                     java -jar hello-world-java-1.0-SNAPSHOT-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob
+                     -->                     
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>1.5</version>
                 <executions>
@@ -120,9 +130,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- the maven configuration for this module is intended for use with
-                     maven 3.+, you can change the version to 2.+ or delete the 
-                     maven-enforcer-plugin configuration completely at your own risk -->
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>1.0.1</version>
                 <executions>
@@ -133,16 +140,18 @@
                         </goals>
                         <configuration>
                             <rules>
+                                <requireJavaVersion>
+                                    <version>1.5.0</version>
+                                </requireJavaVersion>
                                 <requireMavenVersion>
-                                    <!-- right now the plugin works accepts
-                                         the version as lowest allowed
-                                         so there is no need to use fancy formats
+                                    <!-- right now the plugin reads the version
+                                         as lowest allowed, so there is no need 
+                                         to use fancy formats like: [3.0,)
                                          see http://maven.apache.org/plugins/maven-enforcer-plugin/rules/versionRanges.html
-                                         like: [1.0,)
                                          -->
                                     <version>3.0.0</version>
                                 </requireMavenVersion>
-                            </rules>    
+                            </rules>
                         </configuration>
                     </execution>
                 </executions>

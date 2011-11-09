@@ -121,6 +121,14 @@ For Maven users i provided the complete dependency configuration:
 	</dependencies>
 ```
 
+## Run Batch Job Run!
+
+
+We have some possibilities to run the job:
+
+* executing the _-executable.jar_ with `java -jar hello-world-java-1.0-SNAPSHOT-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob`
+  * it might be needed to `cd to <project>/target`
+* using the Maven exec plugin with `mvn clean install exec:java -Dexec.mainClass=org.springframework.batch.core.launch.support.CommandLineJobRunner -Dexec.args="spring/batch/job/hello-world-job.xml helloWorldJob"`
 
 
 ## Did you know?
