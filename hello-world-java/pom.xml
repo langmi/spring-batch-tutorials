@@ -28,8 +28,32 @@
 
     <name>hello-world-java</name>
     <url>https://github.com/langmi/spring-batch-tutorials</url>
-    <description>Spring Batch Hello World! Tutorial</description>
+    <description>A simple Spring Batch "Hello World!" tutorial.</description>
 
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>manual</distribution>
+            <comments>
+                Choosed 'manual' distribution, because there are no plans 
+                to upload the project to a maven repository.
+            </comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>michael</id>
+            <name>Michael Lange</name>
+            <email>michael.r.lange@langmi.de</email>
+            <url>http://www.langmi.de</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -113,6 +137,8 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.framework.version}</version>
         </dependency>
+        <!-- spring-jdbc specified, because spring-batch has
+             older 2.5.6 version configured, we want 3.0.6 here -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
