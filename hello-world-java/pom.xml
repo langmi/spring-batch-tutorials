@@ -14,10 +14,6 @@
      limitations under the License.
  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-    <prerequisites>
-        <maven>[3.0,)</maven>
-    </prerequisites>
       
     <modelVersion>4.0.0</modelVersion>
 
@@ -123,6 +119,28 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <!-- the maven configuration for this module is intended for use with
+                     maven 3.+, you can change the version to 2.+ or delete the 
+                     maven-enforcer-plugin configuration completely at your own risk -->
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.0.0</version>
+                                </requireMavenVersion>
+                            </rules>    
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            
         </plugins>        
     </build>
     <dependencies>
@@ -183,5 +201,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
