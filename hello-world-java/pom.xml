@@ -127,6 +127,10 @@
     </build>
     <dependencies>
         <!-- Spring (core) Framework dependencies -->
+        <!-- references version property 
+             <spring.framework.version>3.0.6.RELEASE</spring.framework.version> 
+             just replace ${spring.framework.version} with 3.0.6.RELEASE 
+             if you don't want to use properties -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -137,14 +141,18 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.framework.version}</version>
         </dependency>
-        <!-- spring-jdbc specified, because spring-batch has
-             older 2.5.6 version configured, we want 3.0.6 here -->
         <dependency>
+            <!-- spring-jdbc specified, because spring-batch has
+             older 2.5.6 version configured, but we want the newer 3.0.6 here -->
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.framework.version}</version>
         </dependency>
         <!-- Spring Batch dependencies -->
+        <!-- references version property 
+             <spring.batch.version>2.1.8.RELEASE</spring.batch.version> 
+             just replace ${spring.framework.version} with 2.1.8.RELEASE 
+             if you don't want to use properties -->
         <dependency>
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-core</artifactId>

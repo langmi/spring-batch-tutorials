@@ -5,9 +5,14 @@
 In this tutorial, we will create a simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] and learn some basics for this amazing framework.
 
 ## How to setup a simple Spring Batch project?
+
+
+
 ### Maven
 ### Gradle
 ### IDE specific Project Setups
+
+To create a project with your favourite IDE, please follow the links to the appropiate documentation.
 
 * [Eclipse][eclipse-help]
 * [Intelli J IDEA project setup][intellij-idea-project-setup]
@@ -45,6 +50,7 @@ Each entry in this library list follows the pattern `<library>:<version>`. List 
 	* spring-test:3.0.6.RELEASE
 	* spring-batch-test:2.1.8.RELEASE
 
+For Maven users i provided the complete dependency configuration:
 
 ```
 	<dependencies>
@@ -98,6 +104,8 @@ Each entry in this library list follows the pattern `<library>:<version>`. List 
 	    </dependency>
 	</dependencies>
 ```
+
+
 
 ## Did you know?
 
