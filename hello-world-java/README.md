@@ -20,7 +20,50 @@ The setup of a Spring Batch program roughly consists of 3 parts:
 
 #### Buildr
 
-[Buildr][buildr] is a rather new build system, well actually i think it's a bit exotic to use Ruby to create a build management software for java projects. Anyway here is the configuration to get the project running: ... to be documented ...
+[Buildr][buildr] is a rather new build system, well actually i think it's a bit exotic to use Ruby to create a build management software for java projects. Anyway here is the configuration to get the project running: 
+
+    # Buildr buildfile
+    # 
+    # see http://buildr.apache.org/index.html for more informations to buildr
+
+    repositories.remote << 'http://repo1.maven.org/maven2/'
+
+    COMPILE_ARTIFACTS = [
+        'aopalliance:aopalliance:jar:1.0', 
+        'com.thoughtworks.xstream:xstream:jar:1.3', 
+        'commons-logging:commons-logging:jar:1.1.1', 
+        'org.codehaus.jettison:jettison:jar:1.1', 
+        'org.springframework:spring-aop:jar:3.0.6.RELEASE',
+        'org.springframework:spring-asm:jar:3.0.6.RELEASE',
+        'org.springframework:spring-beans:jar:3.0.6.RELEASE',
+        'org.springframework:spring-context:jar:3.0.6.RELEASE',
+        'org.springframework:spring-core:jar:3.0.6.RELEASE',
+        'org.springframework:spring-expression:jar:3.0.6.RELEASE',
+        'org.springframework:spring-jdbc:jar:3.0.6.RELEASE',
+        'org.springframework:spring-tx:jar:3.0.6.RELEASE',
+        'org.springframework.batch:spring-batch-core:jar:2.1.8.RELEASE',
+        'org.springframework.batch:spring-batch-infrastructure:jar:2.1.8.RELEASE'
+    ]
+    TEST_ARTIFACTS = [
+        'commons-collections:commons-collections:jar:3.2', 
+        'commons-dbcp:commons-dbcp:jar:1.2.2', 
+        'commons-io:commons-io:jar:1.4', 
+        'commons-pool:commons-pool:jar:1.3', 
+        'org.hamcrest:hamcrest-core:jar:1.1', 
+        'org.springframework.batch:spring-batch-test:jar:2.1.8.RELEASE', 
+        'org.springframework:spring-test:jar:3.0.6.RELEASE'
+    ]
+
+    desc 'hello-world-java'
+    define 'hello-world-java' do
+      project.group = 'de.langmi.spring.batch.tutorials'
+      project.version = '1.0-SNAPSHOT'
+      compile.options.target = '1.5'
+      compile.with COMPILE_ARTIFACTS
+      test.with TEST_ARTIFACTS
+      package :jar, :id => 'hello-world-java'
+    end
+
 
 #### Gradle
 
