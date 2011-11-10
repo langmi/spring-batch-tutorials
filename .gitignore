@@ -1,8 +1,7 @@
-
 /hello-world-java/catalog.xml
 /hello-world-java/target
 /hello-world-groovy/catalog.xml
 /hello-world-groovy/target
 /hello-world-groovy/.idea
 /hello-world-groovy/*.iml
-hello-world-java/reports
+/hello-world-java/reports
