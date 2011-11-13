@@ -33,7 +33,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- groovy version -->
-        <groovy.version>1.8.0</groovy.version>
+        <groovy.version>2.0.0-beta-1</groovy.version>
         <!-- re-used dependency version data -->
         <spring.batch.version>2.1.8.RELEASE</spring.batch.version>
         <spring.framework.version>3.0.6.RELEASE</spring.framework.version>
