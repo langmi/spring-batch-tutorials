@@ -13,10 +13,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <prerequisites>
-        <maven>3.+</maven>
-    </prerequisites>
+<project 
+    xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -24,8 +24,10 @@
     <artifactId>parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
     <name>spring batch tutorials parent</name>
     <url>https://github.com/langmi/spring-batch-tutorials</url>
+
     <description>Spring Batch Tutorials parent project for convenient build all feature</description>
 
     <modules>
@@ -39,11 +41,12 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>manual</distribution>
             <comments>
-                Choosed 'manual' distribution, because there are no plans 
+                Declared 'manual' distribution, because there are no plans 
                 to upload the project to a maven repository.
             </comments>
         </license>
     </licenses>
+
     <developers>
         <developer>
             <id>michael</id>

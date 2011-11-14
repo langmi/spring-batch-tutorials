@@ -26,11 +26,12 @@
 
     <name>hello-world-java</name>
     <url>https://github.com/langmi/spring-batch-tutorials</url>
+
     <description>
         A simple Spring Batch "Hello World!" tutorial.
         This projects needs:
         
-        * Java 1.5+
+        * Java 1.6+
         * Maven 3+
         
         see maven-enforcer-plugin configuration.
@@ -42,11 +43,12 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>manual</distribution>
             <comments>
-                I did choose 'manual' distribution, because there are no plans 
+                Declared 'manual' distribution, because there are no plans 
                 to upload the project to a maven repository.
             </comments>
         </license>
     </licenses>
+
     <developers>
         <developer>
             <id>michael</id>
@@ -62,9 +64,10 @@
     </developers>
 
     <properties>
+        <!-- general project settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.java.version>1.6</project.java.version>
         <!-- maven-compiler-plugin settings -->
-        <maven.compiler.jdk>1.6</maven.compiler.jdk>
         <maven.compiler.debug>true</maven.compiler.debug>
         <maven.compiler.optimize>false</maven.compiler.optimize>
         <!-- re-used dependency version data -->
@@ -75,11 +78,19 @@
     <build>
         <plugins>
             <plugin>
+                <!-- maven-compiler-plugin configured to:
+                        * use specific Java Version
+                        * use specific target Java Version
+                        * use UTF-8 for java sources
+                        * use debug compiler settings
+                        * do not use optimize compiler settings
+                        * show deprecated informations (will build anyhow)
+                -->
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>${maven.compiler.jdk}</source>
-                    <target>${maven.compiler.jdk}</target>
+                    <source>${project.java.version}</source>
+                    <target>${project.java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <debug>${maven.compiler.debug}</debug>
                     <optimize>${maven.compiler.optimize}</optimize>
@@ -87,10 +98,27 @@
                 </configuration>
             </plugin>    
             <plugin>
+                <!-- To ensure all project resources will be used
+                     with UTF-8, we use the maven-resources-plugin.
+                -->
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.5</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- maven-surefire-plugin configured to set
+                        * forkMode for clean context per test
+                        
+                     in other projects i set the log4j file place and
+                     java arguments for memory configuration too, but this
+                     is not needed for this simple hello-world project
+                -->
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <forkMode>${maven.surefire.forkmode}</forkMode>
                 </configuration>
             </plugin>
             <plugin>
@@ -133,6 +161,10 @@
                 </executions>
             </plugin>
             <plugin>
+                <!-- 
+                    With the maven-enforcer-plugin i want to make sure
+                    the project is built with maven 3+ and Java 1.6+.
+                -->
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>1.0.1</version>
                 <executions>
@@ -144,7 +176,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>1.5.0</version>
+                                    <version>${project.java.version}</version>
                                 </requireJavaVersion>
                                 <requireMavenVersion>
                                     <!-- right now the plugin reads the version
