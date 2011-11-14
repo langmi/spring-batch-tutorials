@@ -5,3 +5,6 @@
 /hello-world-groovy/.idea
 /hello-world-groovy/*.iml
 /hello-world-java/reports
+
+/hello-world-java/build
+/hello-world-java/.gradle/
