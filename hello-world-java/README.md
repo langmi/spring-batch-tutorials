@@ -18,6 +18,10 @@ The setup of a Spring Batch program roughly consists of 3 parts:
 
 ### Project Setup
 
+For the sake of simplicity i follow the suggested [standard directory layout][project-layout] for [Maven][maven] Projects.
+
+To compile the project, run tests and create a packaged Java Archive i use primarly Maven, but i provided working configurations for other build systems too.
+
 #### Buildr
 
 [Buildr][buildr] is a rather new build system, which could be seen as a prettier Maven. Actually i think it's a bit exotic to use Ruby to create a build management software for Java projects. Anyway here is the configuration to get the project running: 
@@ -253,8 +257,10 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 [hello-world]: http://en.wikipedia.org/wiki/Hello_world_program "Wikipedia: Hello World Programm"
 [intellij-idea-project-setup]: http://www.jetbrains.com/idea/webhelp/creating-new-project-from-scratch.html "Intelli J IDEA: Creating New Project From Scratch"
 [first-introduction]: http://forum.springsource.org/showthread.php?38417-Spring-Batch-Announcement "first Spring Batch announcement from 2007"
+[maven]: http://maven.apache.org/index.html "Maven official home page"
 [netbeans]: http://netbeans.org/ "Netbeans official home page"
 [netbeans-project-setup]: http://netbeans.org/kb/docs/java/project-setup.html "Netbeans: Creating, Importing, and Configuring Java Projects"
+[project-layout]: http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html "Standard directory layout for Maven projects"
 [springsource]: http://www.springsource.com/ "Springsource official home page"
 [spring-batch]: http://static.springsource.org/spring-batch/  "Spring Batch official home page"
 [spring-core]: http://www.springsource.org/spring-core/ "Spring Core Framework official home page"
