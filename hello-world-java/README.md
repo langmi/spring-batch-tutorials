@@ -50,6 +50,8 @@ The setup of a Spring Batch program roughly consists of 3 parts:
         'commons-io:commons-io:jar:1.4', 
         'commons-pool:commons-pool:jar:1.3', 
         'org.hamcrest:hamcrest-core:jar:1.1', 
+        # junit is optional, buildr 1.4.6 uses junit 4.8.2 as default
+        'junit:junit:jar:4.10',
         'org.springframework.batch:spring-batch-test:jar:2.1.8.RELEASE', 
         'org.springframework:spring-test:jar:3.0.6.RELEASE'
     ]
