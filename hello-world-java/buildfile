@@ -38,7 +38,7 @@ desc 'hello-world-java'
 define 'hello-world-java' do
   project.group = 'de.langmi.spring.batch.tutorials'
   project.version = '1.0-SNAPSHOT'
-  compile.options.target = '1.5'
+  compile.options.target = '1.6'
   compile.with COMPILE_ARTIFACTS
   test.with TEST_ARTIFACTS
   package :jar, :id => 'hello-world-java'

@@ -20,7 +20,7 @@ The setup of a Spring Batch program roughly consists of 3 parts:
 
 #### Buildr
 
-[Buildr][buildr] is a rather new build system, well actually i think it's a bit exotic to use Ruby to create a build management software for java projects. Anyway here is the configuration to get the project running: 
+[Buildr][buildr] is a rather new build system, which could be seen as a prettier Maven. Actually i think it's a bit exotic to use Ruby to create a build management software for Java projects. Anyway here is the configuration to get the project running: 
 
     # Buildr buildfile
     # 
@@ -68,6 +68,51 @@ The setup of a Spring Batch program roughly consists of 3 parts:
 
 
 #### Gradle
+
+[Gradle][gradle] is another build system. It is more like the old pal [Ant][ant] and as such a bit more verbose than Buildr. Again here a configuration to get some simple build tasks running:
+
+    /*  Gradle buildfile
+    
+        see http://www.gradle.org/ for more informations to Gradle */
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    
+    project.group = "de.langmi.spring.batch.tutorials"
+    project.version = "1.0-SNAPSHOT"
+    
+    sourceCompatibility = '1.6'
+    targetCompatibility = '1.6'
+    
+    dependencies {
+        compile "aopalliance:aopalliance:1.0"
+        compile "com.thoughtworks.xstream:xstream:1.3"
+        compile "commons-logging:commons-logging:1.1.1" 
+        compile "org.codehaus.jettison:jettison:1.1"
+        compile "org.springframework:spring-aop:3.0.6.RELEASE"
+        compile "org.springframework:spring-asm:3.0.6.RELEASE"
+        compile "org.springframework:spring-beans:3.0.6.RELEASE"
+        compile "org.springframework:spring-context:3.0.6.RELEASE"
+        compile "org.springframework:spring-core:3.0.6.RELEASE"
+        compile "org.springframework:spring-expression:3.0.6.RELEASE"
+        compile "org.springframework:spring-jdbc:3.0.6.RELEASE"
+        compile "org.springframework:spring-tx:3.0.6.RELEASE"
+        compile "org.springframework.batch:spring-batch-core:2.1.8.RELEASE"
+        compile "org.springframework.batch:spring-batch-infrastructure:2.1.8.RELEASE"
+    
+        testCompile "commons-collections:commons-collections:3.2"
+        testCompile "commons-dbcp:commons-dbcp:1.2.2"
+        testCompile "commons-io:commons-io:1.4"
+        testCompile "commons-pool:commons-pool:1.3"
+        testCompile "junit:junit:4.10"
+        testCompile "org.hamcrest:hamcrest-core:1.1"
+        testCompile "org.springframework.batch:spring-batch-test:2.1.8.RELEASE"
+        testCompile "org.springframework:spring-test:3.0.6.RELEASE"
+    }
 
 #### IDE specific Project Setups
 
@@ -193,8 +238,10 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 * license: [Apache 2.0 License][apache-license]
 
 [accenture]: http://www.accenture.com/ "Accenture official home page"
+[ant]: http://ant.apache.org/ "Ant official home page"
 [apache-license]: http://www.apache.org/licenses/LICENSE-2.0.txt "Apache 2.0 License"
 [buildr]: http://buildr.apache.org/ "Buildr official home page"
+[gradle]: http://www.gradle.org/ "Gradle official home page"
 [changes-1-to-2]: http://static.springsource.org/spring-batch/trunk/migration/2.0-highlights.html "Changes from Spring Batch 1.x to 2.0"
 [eclipse-help]: http://www.eclipse.org/documentation/ "Eclipse: Starting Point for Documentation"
 [github-repo]: https://github.com/langmi/spring-batch-tutorials "My Github Repository for Spring Batch Tutorials Sources"
