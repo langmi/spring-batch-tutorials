@@ -72,8 +72,13 @@ The setup of a Spring Batch program roughly consists of 3 parts:
 [Gradle][gradle] is another build system. It is more like the old pal [Ant][ant] and as such a bit more verbose than Buildr. Again here a configuration to get some simple build tasks running:
 
     /*  Gradle buildfile
+        tested with:
+            * Gradle 1.0-milestone-5
+            * Groovy 1.7.10
+            * Java 1.6.0_29
     
         see http://www.gradle.org/ for more informations to Gradle */
+        
     apply plugin: 'java'
     apply plugin: 'maven'
     

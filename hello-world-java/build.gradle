@@ -1,6 +1,12 @@
 /*  Gradle buildfile
 
+    tested with:
+        * Gradle 1.0-milestone-5
+        * Groovy 1.7.10
+        * Java 1.6.0_29
+
     see http://www.gradle.org/ for more informations to Gradle */
+
 apply plugin: 'java'
 apply plugin: 'maven'
 
@@ -15,6 +21,7 @@ project.version = "1.0-SNAPSHOT"
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
 
+// to prevent problems with transitive dependencies i provided the complete needed list
 dependencies {
     compile "aopalliance:aopalliance:1.0"
     compile "com.thoughtworks.xstream:xstream:1.3"
