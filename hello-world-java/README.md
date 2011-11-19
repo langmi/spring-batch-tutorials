@@ -20,15 +20,23 @@ The setup of a Spring Batch program roughly consists of 3 parts:
 
 For the sake of simplicity i follow the suggested [standard directory layout][project-layout] for [Maven][maven] Projects.
 
-To compile the project, run tests and create a packaged Java Archive i use primarly Maven, but i provided working configurations for other build systems too.
+To compile the project, run tests and create a packaged Java Archive, i primarly use Maven, but i provided working configurations for other build systems too.
 
 #### Buildr
 
 [Buildr][buildr] is a rather new build system, which could be seen as a prettier Maven. Actually i think it's a bit exotic to use Ruby to create a build management software for Java projects. Anyway here is the configuration to get the project running: 
 
-    # Buildr buildfile
-    # 
-    # see http://buildr.apache.org/index.html for more informations to buildr
+    =begin
+        Buildr buildfile
+
+        tested with:
+            * Buildr 1.4.6
+            * Ruby 1.8.7
+            * Gem 1.8.8
+            * Java 1.6.0_29
+
+        see http://buildr.apache.org/index.html for more informations to buildr
+    =end
 
     repositories.remote << 'http://repo1.maven.org/maven2/'
 
