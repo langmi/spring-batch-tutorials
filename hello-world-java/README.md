@@ -8,6 +8,25 @@ In this tutorial, we will create a simple [Hello World!][hello-world] program wi
 
 If you are in a hurry or just the code-first type, you can jump right to the source on [my github repository][github-repo].
 
+## Setup a Spring Batch Job
+
+## Learn to speak: "Hello World!"
+
+## Run a Spring Batch Job
+
+### Run Batch Job, Run!
+
+We have some possibilities to run the job:
+
+* executing the _-executable.jar_ from the command line:
+
+`java -jar hello-world-java-1.0-SNAPSHOT-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob`
+
+* using the Maven exec plugin with 
+
+`mvn clean install exec:java -Dexec.mainClass=org.springframework.batch.core.launch.support.CommandLineJobRunner -Dexec.args="spring/batch/job/hello-world-job.xml helloWorldJob"`
+
+
 ## How to setup a simple Spring Batch program?
 
 The setup of a Spring Batch program roughly consists of 3 parts:
@@ -20,13 +39,13 @@ The setup of a Spring Batch program roughly consists of 3 parts:
 
 For the sake of simplicity i follow the suggested [standard directory layout][project-layout] for [Maven][maven] Projects.
 
-To compile the project, run tests and create a packaged Java Archive, i primarly use Maven, but i provided working configurations for other build systems too.
+To compile the project, run tests and create a packaged Java Archive, i primarly use Maven, but i provided working configurations for other build systems too. 
 
 #### Buildr
 
 [Buildr][buildr] is a rather new build system, which could be seen as a prettier Maven. Actually i think it's a bit exotic to use Ruby to create a build management software for Java projects. Anyway here is the configuration to get the project running: 
 
-    =begin
+	=begin
         Buildr buildfile
 
         tested with:
@@ -225,19 +244,6 @@ For Maven users i provided the complete dependency configuration:
 	        <scope>test</scope>
 	    </dependency>
 	</dependencies>
-
-## Run Batch Job, Run!
-
-
-We have some possibilities to run the job:
-
-* executing the _-executable.jar_ from the command line:
- 
-		java -jar hello-world-java-1.0-SNAPSHOT-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob
-
-* using the Maven exec plugin with 
-
-		mvn clean install exec:java -Dexec.mainClass=org.springframework.batch.core.launch.support.CommandLineJobRunner -Dexec.args="spring/batch/job/hello-world-job.xml helloWorldJob"
 
 
 ## Did you know?
