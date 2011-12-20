@@ -17,7 +17,7 @@ All Spring Batch Tutorials:
 * are individual maven projects, the pom.xml in the root directory is only for a convenient _build all_ feature
 * are tested with:
   * Spring Batch 2.1.8.RELEASE
-  * Spring Framework 3.0.6.RELEASE
+  * Spring Framework 3.1.0.RELEASE
 * are provided "as is", no guarantees :-)
 
 ## License
