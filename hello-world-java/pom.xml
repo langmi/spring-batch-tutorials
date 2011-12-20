@@ -72,7 +72,7 @@
         <maven.compiler.optimize>false</maven.compiler.optimize>
         <!-- re-used dependency version data -->
         <spring.batch.version>2.1.8.RELEASE</spring.batch.version>
-        <spring.framework.version>3.0.6.RELEASE</spring.framework.version>
+        <spring.framework.version>3.1.0.RELEASE</spring.framework.version>
     </properties>
 
     <build>
