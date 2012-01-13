@@ -65,7 +65,7 @@
         <!-- general project settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.java.version>1.6</project.java.version>
-        <groovy.version>2.0.0-beta-1</groovy.version>        
+        <groovy.version>2.0.0-beta-2</groovy.version>        
         <!-- re-used dependency version data -->
         <spring.batch.version>2.1.8.RELEASE</spring.batch.version>
         <spring.framework.version>3.1.0.RELEASE</spring.framework.version>
