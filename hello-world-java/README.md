@@ -2,15 +2,33 @@
 
 ## Summary
 
-In this tutorial, we will create a simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] and learn some basics for this amazing framework.
+In this tutorial, we will create a simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] and learn some basics for this amazing Java framework.
 
 ## For the Impatient
 
 If you are in a hurry or just the code-first type, you can jump right to the source on [my github repository][github-repo].
 
+## Introduction
+
+### What is Spring Batch?
+
+From [Spring Batch][spring-batch]:
+
+> Spring Batch is a lightweight, comprehensive batch framework designed to enable the development of robust batch applications vital for the daily operations of enterprise systems.
+
+To get the most of 
+
 ## Setup a Spring Batch Job
 
 ## Learn to speak: "Hello World!"
+
+## How to setup a simple Spring Batch program?
+
+The setup of a Spring Batch program roughly consists of 3 parts:
+
+* project setup
+* Spring Batch infrastructure
+* Spring Batch Job
 
 ## Run a Spring Batch Job
 
@@ -26,14 +44,6 @@ We have some possibilities to run the job:
 
 `mvn clean install exec:java -Dexec.mainClass=org.springframework.batch.core.launch.support.CommandLineJobRunner -Dexec.args="spring/batch/job/hello-world-job.xml helloWorldJob"`
 
-
-## How to setup a simple Spring Batch program?
-
-The setup of a Spring Batch program roughly consists of 3 parts:
-
-* project setup
-* Spring Batch infrastructure
-* Spring Batch Job
 
 ### Project Setup
 

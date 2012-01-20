@@ -1,16 +1,14 @@
 # Spring Batch Tutorials
 
-Collection of Spring Batch Tutorials.
+Spring Batch tutorials, covering all the aspects and methods of this wonderful Java framework.
 
-## Why ?
+## Introduction
 
-To further simplify it, all work is under Apache 2.0 license, fork it, use it, bend it and if you find a bug or improvement, do not hesitate to push a patch.
+Hello and welcome to [my][homepage] Spring Batch tutorials, which are intended for new and advanced users alike.
 
-## What ?
 
-To be documented.
 
-## General Informations
+## Some General Informations
 
 All Spring Batch Tutorials:
 
@@ -23,3 +21,5 @@ All Spring Batch Tutorials:
 ## License
 
 Apache 2.0 License
+
+[homepage]: http://langmi.de
