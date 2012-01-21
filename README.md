@@ -27,6 +27,7 @@ All Spring Batch Tutorials:
   * Spring Batch 2.1.8.RELEASE
   * Spring Framework 3.1.0.RELEASE
 * are provided "as is", no guarantees
+* the font used in logo is [Yanone Kaffeesatz][yanone-kaffeesatz]
 
 ## About Me
 
@@ -50,3 +51,4 @@ Apache 2.0 License
 [spring-batch-templates]: https://github.com/langmi/spring-batch-templates
 [spring-batch-tutorial-logo]: https://github.com/langmi/spring-batch-tutorials/raw/master/spring-batch-tutorials-logo.png
 [stackoverflow]: http://stackoverflow.com/questions/tagged/spring-batch
+[yanone-kaffeesatz]: http://www.yanone.de/typedesign/kaffeesatz/
