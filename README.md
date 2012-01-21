@@ -8,7 +8,7 @@ Hello and welcome to Spring Batch tutorials for new and advanced users alike.
 
 The tutorials will provide you with step-by-step guides for using Spring Batch and some background informations for the concepts. If you are ready to get more, head over to my [Spring Batch Examples][spring-batch-examples], [Templates][spring-batch-templates] and [Maven Archetypes][spring-batch-archetypes] here at github too.
 
-If you want to see a new tutorial or spot an error, do not hesitate to [raise an issue][issue]. For questions to the Spring Batch framework itself, i to ask at [Stackoverflow][stackoverflow] or the official [Spring Batch Forum][spring-batch-forum] (i'm active at both).
+If you want to see a new tutorial or spot an error, do not hesitate to [raise an issue][issue]. For questions to the Spring Batch framework itself, i suggest to ask at [Stackoverflow][stackoverflow] or the official [Spring Batch Forum][spring-batch-forum] (i'm active at both).
 
 ## Tutorial Topics
 
