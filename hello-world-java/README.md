@@ -16,8 +16,6 @@ From [Spring Batch][spring-batch]:
 
 > Spring Batch is a lightweight, comprehensive batch framework designed to enable the development of robust batch applications vital for the daily operations of enterprise systems.
 
-To get the most of 
-
 ## Setup a Spring Batch Job
 
 ## Learn to speak: "Hello World!"
@@ -202,59 +200,6 @@ Each entry in this library list follows the pattern `<library>:<version>`. List 
 	* spring-test:3.0.6.RELEASE
 	* spring-batch-test:2.1.8.RELEASE
 
-For Maven users i provided the complete dependency configuration:
-
-	<dependencies>
-	    <!-- Spring (core) Framework dependencies -->
-	    <dependency>
-	        <groupId>org.springframework</groupId>
-	        <artifactId>spring-beans</artifactId>
-	        <version>${spring.framework.version}</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.springframework</groupId>
-	        <artifactId>spring-context</artifactId>
-	        <version>${spring.framework.version}</version>
-	    </dependency>
-	    <!-- spring-jdbc specified, because spring-batch has
-	         older 2.5.6 version configured, we want 3.0.6 here -->
-	    <dependency>
-	        <groupId>org.springframework</groupId>
-	        <artifactId>spring-jdbc</artifactId>
-	        <version>${spring.framework.version}</version>
-	    </dependency>
-	    <!-- Spring Batch dependencies -->
-	    <dependency>
-	        <groupId>org.springframework.batch</groupId>
-	        <artifactId>spring-batch-core</artifactId>
-	        <version>${spring.batch.version}</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.springframework.batch</groupId>
-	        <artifactId>spring-batch-infrastructure</artifactId>
-	        <version>${spring.batch.version}</version>
-	    </dependency>
-	    <!-- test scoped dependencies -->
-	    <dependency>
-	        <groupId>org.springframework.batch</groupId>
-	        <artifactId>spring-batch-test</artifactId>
-	        <version>${spring.batch.version}</version>
-	        <scope>test</scope>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.springframework</groupId>
-	        <artifactId>spring-test</artifactId>
-	        <version>${spring.framework.version}</version>
-	        <scope>test</scope>            
-	    </dependency>
-	    <dependency>
-	        <groupId>junit</groupId>
-	        <artifactId>junit</artifactId>
-	        <version>4.10</version>
-	        <scope>test</scope>
-	    </dependency>
-	</dependencies>
-
 
 ## Did you know?
 
@@ -266,7 +211,7 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
     * Java 1.6
     * Maven 3
 	* [Spring Batch][spring-batch] 2.1.8.RELEASE
-	* [Spring Framework(core)][spring-core] 3.0.6.RELEASE
+	* [Spring Framework(core)][spring-core] 3.1.0.RELEASE
 * used IDE: primarily programmed with [Netbeans][netbeans] 7.0
 * license: [Apache 2.0 License][apache-license]
 
