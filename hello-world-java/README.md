@@ -2,7 +2,7 @@
 
 ## Summary
 
-In this tutorial, we will create a simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] and learn some basics for this amazing Java framework.
+In this tutorial, we will create a simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] Version 2.1 and learn some basics for this amazing Java  [batch processing][wikipedia-batch-processing] framework.
 
 ## For the Impatient
 
@@ -15,6 +15,30 @@ If you are in a hurry or just the code-first type, you can jump right to the sou
 From [Spring Batch][spring-batch]:
 
 > Spring Batch is a lightweight, comprehensive batch framework designed to enable the development of robust batch applications vital for the daily operations of enterprise systems.
+
+Doesn't that sound like the usual sales pitch? Ok lets try it with (my) own words:
+
+> Spring Batch is a framework, which does the grunt work for your Java Batches and provides lots of ready-to-use implementations to keep your own code minimal.
+
+
+### Basic Spring Batch Concepts
+
+The official reference covers the [Spring Batch concepts][spring-batch-domain-concepts] in every detail, for this tutorial we can start with a more simplified view:
+
+A Spring Batch program usually consists of a Job with one or more Steps.
+
+![Spring Batch Job][spring-batch-concept-job]
+
+A standard Step reads data, processes it and writes data.
+
+![Spring Batch Step][spring-batch-concept-step]
+
+
+
+
+## Get Ready!
+
+
 
 ## Setup a Spring Batch Job
 
@@ -232,4 +256,8 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 [project-layout]: http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html "Standard directory layout for Maven projects"
 [springsource]: http://www.springsource.com/ "Springsource official home page"
 [spring-batch]: http://static.springsource.org/spring-batch/  "Spring Batch official home page"
+[spring-batch-concept-job]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-concept-job.png
+[spring-batch-concept-step]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-concept-step.png
 [spring-core]: http://www.springsource.org/spring-core/ "Spring Core Framework official home page"
+[spring-batch-domain-concepts]: http://static.springsource.org/spring-batch/reference/html/domain.html
+[wikipedia-batch-processing]: http://en.wikipedia.org/wiki/Batch_processing
