@@ -1,5 +1,8 @@
 # Spring Batch Tutorials
 
+
+![Spring Batch Tutorials Logo][spring-batch-tutorial-logo]
+
 Spring Batch tutorials, covering all the aspects and methods of this wonderful Java framework.
 
 ## Introduction
@@ -41,8 +44,9 @@ Apache 2.0 License
 [hello-world-groovy]: https://github.com/langmi/spring-batch-tutorials/tree/master/hello-world-groovy
 [homepage]: http://langmi.de
 [issue]: https://github.com/langmi/spring-batch-tutorials/issues
-[spring-batch-forum]: http://forum.springsource.org/forumdisplay.php?41-Batch
-[spring-batch-examples]: https://github.com/langmi/spring-batch-examples
-[spring-batch-templates]: https://github.com/langmi/spring-batch-templates
 [spring-batch-archetypes]: https://github.com/langmi/spring-batch-archetypes
+[spring-batch-examples]: https://github.com/langmi/spring-batch-examples
+[spring-batch-forum]: http://forum.springsource.org/forumdisplay.php?41-Batch
+[spring-batch-templates]: https://github.com/langmi/spring-batch-templates
+[spring-batch-tutorial-logo]: spring-batch-tutorials-logo.png
 [stackoverflow]: http://stackoverflow.com/questions/tagged/spring-batch
