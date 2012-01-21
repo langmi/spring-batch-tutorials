@@ -48,5 +48,5 @@ Apache 2.0 License
 [spring-batch-examples]: https://github.com/langmi/spring-batch-examples
 [spring-batch-forum]: http://forum.springsource.org/forumdisplay.php?41-Batch
 [spring-batch-templates]: https://github.com/langmi/spring-batch-templates
-[spring-batch-tutorial-logo]: spring-batch-tutorials-logo.png
+[spring-batch-tutorial-logo]: https://github.com/langmi/spring-batch-tutorials/blob/master/spring-batch-tutorials-logo.png
 [stackoverflow]: http://stackoverflow.com/questions/tagged/spring-batch
