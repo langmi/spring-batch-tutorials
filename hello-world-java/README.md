@@ -18,14 +18,14 @@ From [Spring Batch][spring-batch]:
 
 Doesn't that sound like the usual sales pitch? Ok lets try it with (my) own words:
 
-> Spring Batch is a framework, which does the grunt work for your Java Batches and provides lots of ready-to-use implementations to keep your own code minimal.
+> Spring Batch is a framework, which does the grunt work for your Java batch needs and provides lots of ready-to-use implementations to keep your own code minimal.
 
 
 ### Basic Spring Batch Concepts
 
 The official reference covers the [Spring Batch concepts][spring-batch-domain-concepts] in every detail, but for this tutorial we can start with a more simplified view:
 
-A Spring Batch program usually consists of a Job with one or more Steps.
+A Spring Batch program usually consists of a Job, which encapsulates a flow of steps. Here visualized with a sequential example:
 
 ![Spring Batch Job][spring-batch-concept-job]
 
@@ -33,26 +33,41 @@ A standard Step reads data, processes it and writes data.
 
 ![Spring Batch Step][spring-batch-concept-step]
 
-The data is handled with a so called [Chunk Oriented Processing][chunk-oriented-processing] approach.
+The data is handled with a so called [Chunk Oriented Processing][chunk-oriented-processing] approach, where the data is read individually, processed individually, but written in chunks.
 
 ![Spring Batch Chunk][spring-batch-concept-chunk]
 
+The chunks play a role for the transactional behavior too, Spring Batch commits a transaction after each chunk. Thats enough for the basic concepts, time to get ready for some coding.
 
-## Get Ready!
+## Get Ready For Coding!
 
+### IDE Setup
 
+To keep it simple i provided some build manager configurations for:
 
-## Setup a Spring Batch Job
+* [Buildr][buildr] - see `buildfile`, tested with Buildr 1.4.6
+* [Gradle][gradle] - see `build.gradle`, tested with Gradle 1.0-milestone-5
+* [Maven][maven] - see `pom.xml`, needs Maven 3+
 
-## Learn to speak: "Hello World!"
+Each configuration file contains informations on used versions and general setup.
 
-## How to setup a simple Spring Batch program?
+If you work without a build manager you can download all needed libraries from [Spring Batch downloads][spring-batch-downloads], but remember this tutorial is tested with Spring Batch Version 2.1 only.
 
-The setup of a Spring Batch program roughly consists of 3 parts:
+### Use Case
 
-* project setup
+This tutorial implements a simple use case:
+
+* read lines from a file
+* process each line and enrich the data
+* write result in a output file
+
+### Spring Batch Program
+
+A Spring Batch program roughly consists of 3 parts:
+
 * Spring Batch infrastructure
-* Spring Batch Job
+* Spring Batch Job definition
+* some custom code for the job
 
 ## Run a Spring Batch Job
 
@@ -67,29 +82,6 @@ We have some possibilities to run the job:
 * using the Maven exec plugin with 
 
 `mvn clean install exec:java -Dexec.mainClass=org.springframework.batch.core.launch.support.CommandLineJobRunner -Dexec.args="spring/batch/job/hello-world-job.xml helloWorldJob"`
-
-
-### Project Setup
-
-For the sake of simplicity i follow the suggested [standard directory layout][project-layout] for [Maven][maven] Projects.
-
-To compile the project, run tests and create a packaged Java Archive, i primarly use Maven, but i provided working configurations for other build systems too. 
-
-#### Buildr
-
-[Buildr][buildr] is a rather new build system, which could be seen as a prettier Maven. Actually i think it's a bit exotic to use Ruby to create a build management software for Java projects. Anyways there is the configuration to get the project running.
-
-#### Gradle
-
-[Gradle][gradle] is another build system. It is more like the old pal [Ant][ant] and as such a bit more verbose than Buildr. Again there is a configuration to get some simple build tasks running.
-
-#### IDE specific Project Setups
-
-To create a project with your favourite IDE, please follow the links to the appropiate documentation.
-
-* [Eclipse][eclipse-help]
-* [Intelli J IDEA project setup][intellij-idea-project-setup]
-* [Netbeans project setup][netbeans-project-setup]
 
 ## Did you know?
 
@@ -129,4 +121,5 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 [spring-batch-concept-step]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-concept-step.png
 [spring-core]: http://www.springsource.org/spring-core/ "Spring Core Framework official home page"
 [spring-batch-domain-concepts]: http://static.springsource.org/spring-batch/reference/html/domain.html
+[spring-batch-downloads]: http://static.springsource.org/spring-batch/downloads.html
 [wikipedia-batch-processing]: http://en.wikipedia.org/wiki/Batch_processing
