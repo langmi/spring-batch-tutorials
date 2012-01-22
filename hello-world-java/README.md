@@ -1,12 +1,14 @@
 # "Hello World!" with Spring Batch 2.1
 
+![Logo][spring-batch-tutorial-hello-world-logo]
+
 ## Summary
 
 In this tutorial, we will create a simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] Version 2.1 and learn some basics for this amazing Java  [batch processing][wikipedia-batch-processing] framework.
 
 ## For the Impatient
 
-If you are in a hurry or just the code-first type, you can jump right to the source on [my github repository][github-repo].
+If you are in a hurry or just the code-first type, you can jump right to the source here on [my github repository][github-repo].
 
 ## Introduction
 
@@ -98,22 +100,16 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 * license: [Apache 2.0 License][apache-license]
 
 [accenture]: http://www.accenture.com/ "Accenture official home page"
-[ant]: http://ant.apache.org/ "Ant official home page"
 [apache-license]: http://www.apache.org/licenses/LICENSE-2.0.txt "Apache 2.0 License"
 [buildr]: http://buildr.apache.org/ "Buildr official home page"
 [chunk-oriented-processing-news]: http://static.springsource.org/spring-batch/reference/html/whatsNew.html#whatsNewChunkOrientedProcessing
 [chunk-oriented-processing]: http://static.springsource.org/spring-batch/reference/html/configureStep.html#chunkOrientedProcessing
 [gradle]: http://www.gradle.org/ "Gradle official home page"
 [changes-1-to-2]: http://static.springsource.org/spring-batch/trunk/migration/2.0-highlights.html "Changes from Spring Batch 1.x to 2.0"
-[eclipse-help]: http://www.eclipse.org/documentation/ "Eclipse: Starting Point for Documentation"
 [github-repo]: https://github.com/langmi/spring-batch-tutorials "My Github Repository for Spring Batch Tutorials Sources"
 [hello-world]: http://en.wikipedia.org/wiki/Hello_world_program "Wikipedia: Hello World Programm"
-[intellij-idea-project-setup]: http://www.jetbrains.com/idea/webhelp/creating-new-project-from-scratch.html "Intelli J IDEA: Creating New Project From Scratch"
 [first-introduction]: http://forum.springsource.org/showthread.php?38417-Spring-Batch-Announcement "first Spring Batch announcement from 2007"
 [maven]: http://maven.apache.org/index.html "Maven official home page"
-[netbeans]: http://netbeans.org/ "Netbeans official home page"
-[netbeans-project-setup]: http://netbeans.org/kb/docs/java/project-setup.html "Netbeans: Creating, Importing, and Configuring Java Projects"
-[project-layout]: http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html "Standard directory layout for Maven projects"
 [springsource]: http://www.springsource.com/ "Springsource official home page"
 [spring-batch]: http://static.springsource.org/spring-batch/  "Spring Batch official home page"
 [spring-batch-concept-chunk]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-concept-chunk.png
@@ -122,4 +118,5 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 [spring-core]: http://www.springsource.org/spring-core/ "Spring Core Framework official home page"
 [spring-batch-domain-concepts]: http://static.springsource.org/spring-batch/reference/html/domain.html
 [spring-batch-downloads]: http://static.springsource.org/spring-batch/downloads.html
+[spring-batch-tutorial-hello-world-logo]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-tutorial-hello-world-logo.png
 [wikipedia-batch-processing]: http://en.wikipedia.org/wiki/Batch_processing
