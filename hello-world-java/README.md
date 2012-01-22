@@ -6,9 +6,11 @@
 
 In this tutorial, we will create a really simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] Version 2.1 and learn some basics for this amazing Java  [batch processing][wikipedia-batch-processing] framework.
 
+You will need at least a basic understanding of the [Spring (Core) framework][spring-core] to get along with the tutorial.
+
 ## For the Impatient
 
-If you are in a hurry or just the code-first type, you can jump right to the source here on [my github repository][github-repo].
+If you are in a hurry or just the code-first type, you can jump right to the source here on [my github repository][github-repo], dive into the hello-world-java directory.
 
 ## Introduction
 
@@ -45,7 +47,7 @@ The chunks play a role for the transactional behavior too, Spring Batch commits 
 
 The Spring Batch framework is really lightweight, but that comes at the prize of a little more complex XML configuration. It is a **Spring** framework after all.
 
-### Spring Batch Program Configuration
+### Spring Batch Configuration
 
 The configuration needed to get a Spring Batch program running roughly consists of:
 
@@ -53,13 +55,13 @@ The configuration needed to get a Spring Batch program running roughly consists 
 * Spring Batch Job definition
 
 
-#### Spring Batch Program Infrastructure
+#### Spring Batch Infrastructure
 
 Under the hood Spring Batch works with some tables to keep the state of the jobs and to provide restartability. 
-The tables are accessed with a Job Repository and to start a Job the framework provides a Job Launcher.
-Because a job works with transaction, a transaction manager is mandatory.
+The tables are accessed with a *Job Repository* and to start a Job the framework provides a *Job Launcher*.
+Because a job works with transaction, a *transaction manager* is mandatory.
 
-To keep this tutorial simple we use a simple table-less Job Repository and a dummy transaction manager, translated to the Spring and Spring Batch XML configuration it looks like this:
+To keep this tutorial simple we use a table-less Job Repository and a dummy transaction manager, translated to the Spring and Spring Batch XML configuration it looks like this:
 
     <bean id="jobLauncher" 
           class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
@@ -74,26 +76,165 @@ To keep this tutorial simple we use a simple table-less Job Repository and a dum
 
 This is at the same time the most minimal Spring Batch infrastructure configuration possible.
 
-#### Spring Batch Program Job Definition
+#### Spring Batch Job Definition
 
+The *Job* definition is quite short:
 
-
-    <job id="helloWorldJob" 
-         xmlns="http://www.springframework.org/schema/batch">
+    <job id="helloWorldJob">
         <step id="helloWorldStep" >
             <tasklet ref="helloWorldTasklet" />
         </step>
     </job>
+    <bean id="helloWorldTasklet" 
+          class="de.langmi.spring.batch.tutorials.helloworld.HelloWorldTasklet" />
+
+In contrast to the introduction of the basic concepts, we use a so called [Tasklet Step][tasklet-step]. A *Tasklet Step* makes bypasses the standard Step concept and makes it possible to just implement one method, like printing out *Hello World!*. 
+
+#### Complete XML
+
+All XML taken from the configuration and joined in one file:
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:p="http://www.springframework.org/schema/p" 
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+           http://www.springframework.org/schema/batch 
+           http://www.springframework.org/schema/batch/spring-batch-2.1.xsd
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+        <description>
+            Simple Spring Batch Configuration
+            
+            - one tasklet step
+              - prints out "Hello World!"
+            - setup without database, uses in-memory JobRepository
+            - not restartable
+        </description>
+        <!-- 
+            inline xmlns, otherwise it would look like 
+            'batch:job, batch:step, etc.' 
+        -->
+        <job id="helloWorldJob" 
+             xmlns="http://www.springframework.org/schema/batch">
+            <step id="helloWorldStep" >
+                <tasklet ref="helloWorldTasklet" />
+            </step>
+        </job>
+    
+        <bean id="helloWorldTasklet" 
+              class="de.langmi.spring.batch.tutorials.helloworld.HelloWorldTasklet" />
+        
+        <bean id="jobLauncher" 
+              class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
+              p:jobRepository-ref="jobRepository" />
+        
+        <bean id="jobRepository" 
+              class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"
+              p:transactionManager-ref="transactionManager" />
+        
+        <bean id="transactionManager" 
+              class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+    </beans>
 
 
+### Java Code
 
+In the configuration we configured a Tasklet Step, here is the missing source-code:
 
-#### Selfmade Custom Code
+    package de.langmi.spring.batch.tutorials.helloworld;
+    
+    import org.springframework.batch.core.StepContribution;
+    import org.springframework.batch.core.scope.context.ChunkContext;
+    import org.springframework.batch.core.step.tasklet.Tasklet;
+    import org.springframework.batch.repeat.RepeatStatus;
 
+    public class HelloWorldTasklet implements Tasklet {
+    
+        /** {@inheritDoc} */
+        @Override
+        public RepeatStatus execute(StepContribution contribution, 
+                                    ChunkContext chunkContext) throws Exception {
+    
+            System.out.println("Hello World!");
+    
+            return RepeatStatus.FINISHED;
+        }
+    }
 
+And that's it, yes really that is a complete Spring Batch.
 
+## Testing
 
-## Run a Spring Batch Job
+### Testing The Tasklet Step
+
+The Tasklet implementation is pure Java, so we can test it as that with [JUnit][junit]:
+
+    public class HelloWorldTaskletTest {
+    
+        private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        private final Tasklet tasklet = new HelloWorldTasklet();
+    
+        @Test
+        public void testExecute() throws Exception {
+            tasklet.execute(null, null);
+            // the \n is important, because .println is used
+            assertEquals("Hello World!\n", outContent.toString());
+        }
+    
+        @Before
+        public void setUpStreams() {
+            // catch system out
+            System.setOut(new PrintStream(outContent));
+        }
+    
+        @After
+        public void cleanUpStreams() {
+            // reset JVM standard
+            System.setOut(null);
+        }
+    }
+
+### Testing Complete Job
+
+    @ContextConfiguration(locations = {"classpath*:spring/batch/job/hello-world-job.xml"})
+    @RunWith(SpringJUnit4ClassRunner.class)
+    public class HelloWorldJobConfigurationTest {
+    
+        @Autowired
+        private Job job;
+        @Autowired
+        private JobLauncher jobLauncher;
+        private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    
+        /** Launch Test. */
+        @Test
+        public void launchJob() throws Exception {
+            // launch the job
+            JobExecution jobExecution = jobLauncher.run(job, new JobParameters());
+    
+            // assert job run status
+            assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
+    
+            // the \n is important, because .println is used
+            assertEquals("Hello World!\n", outContent.toString());
+        }
+    
+        @Before
+        public void setUpStreams() {
+            // catch system out
+            System.setOut(new PrintStream(outContent));
+        }
+    
+        @After
+        public void cleanUpStreams() {
+            // reset JVM standard
+            System.setOut(null);
+        }
+    }
+
+## Run The Spring Batch Job
 
 ### Run Batch Job, Run!
 
@@ -143,9 +284,10 @@ If you work without a build manager you can download all needed libraries from [
 [changes-1-to-2]: http://static.springsource.org/spring-batch/trunk/migration/2.0-highlights.html "Changes from Spring Batch 1.x to 2.0"
 [chunk-oriented-processing-news]: http://static.springsource.org/spring-batch/reference/html/whatsNew.html#whatsNewChunkOrientedProcessing
 [chunk-oriented-processing]: http://static.springsource.org/spring-batch/reference/html/configureStep.html#chunkOrientedProcessing
-[gradle]: http://www.gradle.org/ "Gradle official home page"
 [first-introduction]: http://forum.springsource.org/showthread.php?38417-Spring-Batch-Announcement "first Spring Batch announcement from 2007"
+[gradle]: http://www.gradle.org/ "Gradle official home page"
 [github-repo]: https://github.com/langmi/spring-batch-tutorials "My Github Repository for Spring Batch Tutorials Sources"
+[junit]: http://www.junit.org/
 [hello-world]: http://en.wikipedia.org/wiki/Hello_world_program "Wikipedia: Hello World Programm"
 [maven]: http://maven.apache.org/index.html "Maven official home page"
 [pom-xml]: http://foo.com
@@ -158,4 +300,5 @@ If you work without a build manager you can download all needed libraries from [
 [spring-batch-domain-concepts]: http://static.springsource.org/spring-batch/reference/html/domain.html
 [spring-batch-downloads]: http://static.springsource.org/spring-batch/downloads.html
 [spring-batch-tutorial-hello-world-logo]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-tutorial-hello-world-logo.png
+[tasklet-step]: http://static.springsource.org/spring-batch/reference/html/configureStep.html#taskletStep
 [wikipedia-batch-processing]: http://en.wikipedia.org/wiki/Batch_processing

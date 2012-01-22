@@ -15,7 +15,11 @@
  */
 package de.langmi.spring.batch.tutorials.helloworld;
 
+import java.io.PrintStream;
+import org.junit.After;
+import java.io.ByteArrayOutputStream;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
@@ -41,6 +45,7 @@ public class HelloWorldJobConfigurationTest {
     private Job job;
     @Autowired
     private JobLauncher jobLauncher;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     /** Launch Test. */
     @Test
@@ -50,5 +55,20 @@ public class HelloWorldJobConfigurationTest {
 
         // assert job run status
         assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
+
+        // the \n is important, because .println is used
+        assertEquals("Hello World!\n", outContent.toString());
+    }
+
+    @Before
+    public void setUpStreams() {
+        // catch system out
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @After
+    public void cleanUpStreams() {
+        // reset JVM standard
+        System.setOut(null);
     }
 }
