@@ -4,7 +4,7 @@
 
 ## Summary
 
-In this tutorial, we will create a simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] Version 2.1 and learn some basics for this amazing Java  [batch processing][wikipedia-batch-processing] framework.
+In this tutorial, we will create a really simple [Hello World!][hello-world] program with [Spring Batch][spring-batch] Version 2.1 and learn some basics for this amazing Java  [batch processing][wikipedia-batch-processing] framework.
 
 ## For the Impatient
 
@@ -14,7 +14,7 @@ If you are in a hurry or just the code-first type, you can jump right to the sou
 
 ### What is Spring Batch?
 
-From [Spring Batch][spring-batch]:
+From the [official Spring Batch website][spring-batch]:
 
 > Spring Batch is a lightweight, comprehensive batch framework designed to enable the development of robust batch applications vital for the daily operations of enterprise systems.
 
@@ -27,11 +27,11 @@ Doesn't that sound like the usual sales pitch? Ok lets try it with (my) own word
 
 The official reference covers the [Spring Batch concepts][spring-batch-domain-concepts] in every detail, but for this tutorial we can start with a more simplified view:
 
-A Spring Batch program usually consists of a Job, which encapsulates a flow of steps. Here visualized with a sequential example:
+A Spring Batch program usually consists of a Job, which encapsulates a flow of steps, which can be seen as abstract isolated unit of works. Here visualized with a sequential example:
 
 ![Spring Batch Job][spring-batch-concept-job]
 
-A standard Step reads data, processes it and writes data.
+A standard Step reads data, processes it and writes data, until the data from the reader is exhausted.
 
 ![Spring Batch Step][spring-batch-concept-step]
 
@@ -43,33 +43,55 @@ The chunks play a role for the transactional behavior too, Spring Batch commits 
 
 ## Get Ready For Coding!
 
-### IDE Setup
+The Spring Batch framework is really lightweight, but that comes at the prize of a little more complex XML configuration. It is a **Spring** framework after all.
 
-To keep it simple i provided some build manager configurations for:
+### Spring Batch Program Configuration
 
-* [Buildr][buildr] - see `buildfile`, tested with Buildr 1.4.6
-* [Gradle][gradle] - see `build.gradle`, tested with Gradle 1.0-milestone-5
-* [Maven][maven] - see `pom.xml`, needs Maven 3+
-
-Each configuration file contains informations on used versions and general setup.
-
-If you work without a build manager you can download all needed libraries from [Spring Batch downloads][spring-batch-downloads], but remember this tutorial is tested with Spring Batch Version 2.1 only.
-
-### Use Case
-
-This tutorial implements a simple use case:
-
-* read lines from a file
-* process each line and enrich the data
-* write result in a output file
-
-### Spring Batch Program
-
-A Spring Batch program roughly consists of 3 parts:
+The configuration needed to get a Spring Batch program running roughly consists of:
 
 * Spring Batch infrastructure
 * Spring Batch Job definition
-* some custom code for the job
+
+
+#### Spring Batch Program Infrastructure
+
+Under the hood Spring Batch works with some tables to keep the state of the jobs and to provide restartability. 
+The tables are accessed with a Job Repository and to start a Job the framework provides a Job Launcher.
+Because a job works with transaction, a transaction manager is mandatory.
+
+To keep this tutorial simple we use a simple table-less Job Repository and a dummy transaction manager, translated to the Spring and Spring Batch XML configuration it looks like this:
+
+    <bean id="jobLauncher" 
+          class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
+          p:jobRepository-ref="jobRepository" />
+	
+    <bean id="jobRepository" 
+          class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"
+          p:transactionManager-ref="transactionManager" />
+    
+    <bean id="transactionManager" 
+          class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+This is at the same time the most minimal Spring Batch infrastructure configuration possible.
+
+#### Spring Batch Program Job Definition
+
+
+
+    <job id="helloWorldJob" 
+         xmlns="http://www.springframework.org/schema/batch">
+        <step id="helloWorldStep" >
+            <tasklet ref="helloWorldTasklet" />
+        </step>
+    </job>
+
+
+
+
+#### Selfmade Custom Code
+
+
+
 
 ## Run a Spring Batch Job
 
@@ -99,17 +121,34 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 * used IDE: primarily programmed with [Netbeans][netbeans] 7.0
 * license: [Apache 2.0 License][apache-license]
 
+
+### Maven, Buildr, Gradle and Friends
+
+To keep it simple i provided some build manager configurations for:
+
+* [Buildr][buildr] - see [buildfile][buildfile], tested with Buildr 1.4.6
+* [Gradle][gradle] - see [build.gradle][build-gradle], tested with Gradle 1.0-milestone-5
+* [Maven][maven] - see [pom.xml][pom-xml], needs Maven 3+
+
+Each configuration file contains informations on used versions and general setup.
+
+If you work without a build manager you can download all needed libraries from [Spring Batch downloads][spring-batch-downloads], but remember this tutorial is tested with Spring Batch Version 2.1 only.
+
+
 [accenture]: http://www.accenture.com/ "Accenture official home page"
 [apache-license]: http://www.apache.org/licenses/LICENSE-2.0.txt "Apache 2.0 License"
 [buildr]: http://buildr.apache.org/ "Buildr official home page"
+[buildfile]: https://github.com/langmi/spring-batch-tutorials/blob/master/hello-world-java/buildfile
+[build-gradle]: https://github.com/langmi/spring-batch-tutorials/blob/master/hello-world-java/build.gradle
+[changes-1-to-2]: http://static.springsource.org/spring-batch/trunk/migration/2.0-highlights.html "Changes from Spring Batch 1.x to 2.0"
 [chunk-oriented-processing-news]: http://static.springsource.org/spring-batch/reference/html/whatsNew.html#whatsNewChunkOrientedProcessing
 [chunk-oriented-processing]: http://static.springsource.org/spring-batch/reference/html/configureStep.html#chunkOrientedProcessing
 [gradle]: http://www.gradle.org/ "Gradle official home page"
-[changes-1-to-2]: http://static.springsource.org/spring-batch/trunk/migration/2.0-highlights.html "Changes from Spring Batch 1.x to 2.0"
+[first-introduction]: http://forum.springsource.org/showthread.php?38417-Spring-Batch-Announcement "first Spring Batch announcement from 2007"
 [github-repo]: https://github.com/langmi/spring-batch-tutorials "My Github Repository for Spring Batch Tutorials Sources"
 [hello-world]: http://en.wikipedia.org/wiki/Hello_world_program "Wikipedia: Hello World Programm"
-[first-introduction]: http://forum.springsource.org/showthread.php?38417-Spring-Batch-Announcement "first Spring Batch announcement from 2007"
 [maven]: http://maven.apache.org/index.html "Maven official home page"
+[pom-xml]: http://foo.com
 [springsource]: http://www.springsource.com/ "Springsource official home page"
 [spring-batch]: http://static.springsource.org/spring-batch/  "Spring Batch official home page"
 [spring-batch-concept-chunk]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-concept-chunk.png
