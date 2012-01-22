@@ -58,7 +58,7 @@ The configuration needed to get a Spring Batch program running roughly consists 
 #### Spring Batch Infrastructure
 
 Under the hood Spring Batch works with some tables to keep the state of the jobs and to provide restartability. 
-The tables are accessed with a *Job Repository* and to start a Job the framework provides a *Job Launcher*.
+The tables are accessed with a DAO called *Job Repository* and to start a Job the framework provides a *Job Launcher*.
 Because a job works with transaction, a *transaction manager* is mandatory.
 
 To keep this tutorial simple we use a table-less Job Repository and a dummy transaction manager, translated to the Spring and Spring Batch XML configuration it looks like this:
@@ -88,11 +88,11 @@ The *Job* definition is quite short:
     <bean id="helloWorldTasklet" 
           class="de.langmi.spring.batch.tutorials.helloworld.HelloWorldTasklet" />
 
-In contrast to the introduction of the basic concepts, we use a so called [Tasklet Step][tasklet-step]. A *Tasklet Step* makes bypasses the standard Step concept and makes it possible to just implement one method, like printing out *Hello World!*. 
+In contrast to the introduction of the basic concepts, we use a so called [Tasklet Step][tasklet-step]. A *Tasklet Step* bypasses the standard Step concept and makes it possible to just implement one method, like printing out *Hello World!*. 
 
 #### Complete XML
 
-All XML taken from the configuration and joined in one file:
+All XML taken from the configuration above and joined in one file:
 
     <?xml version="1.0" encoding="UTF-8"?>
     <beans xmlns="http://www.springframework.org/schema/beans"
@@ -112,12 +112,12 @@ All XML taken from the configuration and joined in one file:
             - setup without database, uses in-memory JobRepository
             - not restartable
         </description>
+        
         <!-- 
             inline xmlns, otherwise it would look like 
             'batch:job, batch:step, etc.' 
         -->
-        <job id="helloWorldJob" 
-             xmlns="http://www.springframework.org/schema/batch">
+        <job id="helloWorldJob" xmlns="http://www.springframework.org/schema/batch">
             <step id="helloWorldStep" >
                 <tasklet ref="helloWorldTasklet" />
             </step>
@@ -198,6 +198,8 @@ The Tasklet implementation is pure Java, so we can test it as that with [JUnit][
 
 ### Testing Complete Job
 
+To test the complete Job we can use a lot of Spring and Spring Batch test utilities. The only difference to a standard Spring test is the use of the Job Launcher, which is needed to ... launch a job.
+
     @ContextConfiguration(locations = {"classpath*:spring/batch/job/hello-world-job.xml"})
     @RunWith(SpringJUnit4ClassRunner.class)
     public class HelloWorldJobConfigurationTest {
@@ -208,7 +210,7 @@ The Tasklet implementation is pure Java, so we can test it as that with [JUnit][
         private JobLauncher jobLauncher;
         private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     
-        /** Launch Test. */
+        /** Simple Launch Test. */
         @Test
         public void launchJob() throws Exception {
             // launch the job
@@ -238,15 +240,24 @@ The Tasklet implementation is pure Java, so we can test it as that with [JUnit][
 
 ### Run Batch Job, Run!
 
-We have some possibilities to run the job:
+#### Mainclass (from within IDE)
 
-* executing the _-executable.jar_ from the command line:
+using the Maven exec plugin with 
+
+`mvn clean install exec:java -Dexec.mainClass=org.springframework.batch.core.launch.support.CommandLineJobRunner -Dexec.args="spring/batch/job/hello-world-job.xml helloWorldJob"`
+
+#### All-One-Jar
+
+executing the _-executable.jar_ from the command line:
 
 `java -jar hello-world-java-1.0-SNAPSHOT-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob`
 
-* using the Maven exec plugin with 
+#### Complete Runtime
 
-`mvn clean install exec:java -Dexec.mainClass=org.springframework.batch.core.launch.support.CommandLineJobRunner -Dexec.args="spring/batch/job/hello-world-job.xml helloWorldJob"`
+#### Web Archive
+
+
+
 
 ## Did you know?
 

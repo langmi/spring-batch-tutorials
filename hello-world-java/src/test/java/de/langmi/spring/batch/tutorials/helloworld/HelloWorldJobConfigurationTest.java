@@ -47,7 +47,7 @@ public class HelloWorldJobConfigurationTest {
     private JobLauncher jobLauncher;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
-    /** Launch Test. */
+    /** Simple Launch Test. */
     @Test
     public void launchJob() throws Exception {
         // launch the job
