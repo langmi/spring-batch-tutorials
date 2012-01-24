@@ -29,7 +29,7 @@ Doesn't that sound like the usual sales pitch? Ok lets try it with (my) own word
 
 The official reference covers the [Spring Batch concepts][spring-batch-domain-concepts] in every detail, but for this tutorial we can start with a more simplified view:
 
-A Spring Batch program usually consists of a Job, which encapsulates a flow of steps, which can be seen as abstract isolated unit of works. Here visualized with a sequential example:
+A Spring Batch program usually consists of a Job, which encapsulates a flow of steps, where a step can be seen as abstract isolated unit of work. Here that is visualized with a sequential flow example:
 
 ![Spring Batch Job][spring-batch-concept-job]
 
@@ -49,7 +49,7 @@ The Spring Batch framework is really lightweight, but that comes at the prize of
 
 ### Spring Batch Configuration
 
-The configuration needed to get a Spring Batch program running roughly consists of:
+The configuration needed to get a Spring Batch program running roughly consists of two parts:
 
 * Spring Batch infrastructure
 * Spring Batch Job definition
@@ -59,7 +59,7 @@ The configuration needed to get a Spring Batch program running roughly consists 
 
 Under the hood Spring Batch works with some tables to keep the state of the jobs and to provide restartability. 
 The tables are accessed with a DAO called *Job Repository* and to start a Job the framework provides a *Job Launcher*.
-Because a job works with transaction, a *transaction manager* is mandatory.
+Because a job works with transactions, a *transaction manager* is mandatory.
 
 To keep this tutorial simple we use a table-less Job Repository and a dummy transaction manager, translated to the Spring and Spring Batch XML configuration it looks like this:
 
@@ -74,11 +74,11 @@ To keep this tutorial simple we use a table-less Job Repository and a dummy tran
     <bean id="transactionManager" 
           class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
 
-This is at the same time the most minimal Spring Batch infrastructure configuration possible.
+This is at the same time the most minimal Spring Batch infrastructure configuration possible and does not need any self-made code, all implementations are provided by the framework.
 
 #### Spring Batch Job Definition
 
-The *Job* definition is quite short:
+The *Job* definition - for this tutorial - is quite short:
 
     <job id="helloWorldJob">
         <step id="helloWorldStep" >
@@ -88,11 +88,11 @@ The *Job* definition is quite short:
     <bean id="helloWorldTasklet" 
           class="de.langmi.spring.batch.tutorials.helloworld.HelloWorldTasklet" />
 
-In contrast to the introduction of the basic concepts, we use a so called [Tasklet Step][tasklet-step]. A *Tasklet Step* bypasses the standard Step concept and makes it possible to just implement one method, like printing out *Hello World!*. 
+In contrast to the introduction of the basic concepts, we use a so called [Tasklet Step][tasklet-step], without the standard Reader, Processor and Writer.. A *Tasklet Step* bypasses the standard Step concept and makes it possible to just implement one method, like printing out *Hello World!*. 
 
 #### Complete XML
 
-All XML taken from the configuration above and joined in one file:
+All XML taken from the configurations above and joined in one file:
 
     <?xml version="1.0" encoding="UTF-8"?>
     <beans xmlns="http://www.springframework.org/schema/beans"
@@ -141,7 +141,7 @@ All XML taken from the configuration above and joined in one file:
 
 ### Java Code
 
-In the configuration we configured a Tasklet Step, here is the missing source-code:
+In the Job configuration we configured a Tasklet Step, here is the missing source-code:
 
     package de.langmi.spring.batch.tutorials.helloworld;
     
@@ -163,7 +163,7 @@ In the configuration we configured a Tasklet Step, here is the missing source-co
         }
     }
 
-And that's it, yes really that is a complete Spring Batch.
+And that's it, yes really that and the configuration is a complete Spring Batch.
 
 ## Testing
 
@@ -179,7 +179,7 @@ The Tasklet implementation is pure Java, so we can test it as that with [JUnit][
         @Test
         public void testExecute() throws Exception {
             tasklet.execute(null, null);
-            // the \n is important, because .println is used
+            // the \n is important, because .println is used inside the tasklet implementation
             assertEquals("Hello World!\n", outContent.toString());
         }
     
@@ -198,7 +198,7 @@ The Tasklet implementation is pure Java, so we can test it as that with [JUnit][
 
 ### Testing Complete Job
 
-To test the complete Job we can use a lot of Spring and Spring Batch test utilities. The only difference to a standard Spring test is the use of the Job Launcher, which is needed to ... launch a job.
+To test the complete Job we can use a lot of Spring JUnit test utilities. The only difference to a standard Spring test is the use of the Job Launcher, which is needed to launch a job.
 
     @ContextConfiguration(locations = {"classpath*:spring/batch/job/hello-world-job.xml"})
     @RunWith(SpringJUnit4ClassRunner.class)
