@@ -29,15 +29,15 @@ Doesn't that sound like the usual sales pitch? Ok lets try it with (my) own word
 
 The official reference covers the [Spring Batch concepts][spring-batch-domain-concepts] in every detail, but for this tutorial we can start with a more simplified view:
 
-A Spring Batch program usually consists of a Job, which encapsulates a flow of steps, where a step can be seen as abstract isolated unit of work. Here that is visualized with a sequential flow example:
+A Spring Batch program usually consists of a *Job*, which encapsulates a flow of *steps*, where a step can be seen as abstract isolated unit of work. Here that is visualized with a sequential flow example:
 
 ![Spring Batch Job][spring-batch-concept-job]
 
-A standard Step reads data, processes it and writes data, until the data from the reader is exhausted.
+A standard Step *reads* data, *processes* it and *writes* data, until the data from the reader is exhausted.
 
 ![Spring Batch Step][spring-batch-concept-step]
 
-The data is handled with a so called [Chunk Oriented Processing][chunk-oriented-processing] approach, where the data is read individually, processed individually, but written in chunks.
+The data is handled with a so called [Chunk Oriented Processing][chunk-oriented-processing] approach, where the data is read individually, processed individually, but written in *chunks*.
 
 ![Spring Batch Chunk][spring-batch-concept-chunk]
 
@@ -57,8 +57,8 @@ The configuration needed to get a Spring Batch program running roughly consists 
 
 #### Spring Batch Infrastructure
 
-Under the hood Spring Batch works with some tables to keep the state of the jobs and to provide restartability. 
-The tables are accessed with a DAO called *Job Repository* and to start a Job the framework provides a *Job Launcher*.
+Under the hood Spring Batch works with some tables to keep the state of the jobs and steps and to provide re-startability. 
+The tables are accessed with a DAO called [Job Repository][job-repository] and to start a Job the framework provides a [Job Launcher][job-launcher].
 Because a job works with transactions, a *transaction manager* is mandatory.
 
 To keep this tutorial simple we use a table-less Job Repository and a dummy transaction manager, translated to the Spring and Spring Batch XML configuration it looks like this:
@@ -198,7 +198,7 @@ The Tasklet implementation is pure Java, so we can test it as that with [JUnit][
 
 ### Testing Complete Job
 
-To test the complete Job we can use a lot of Spring JUnit test utilities. The only difference to a standard Spring test is the use of the Job Launcher, which is needed to launch a job.
+To test the complete Job we can use a lot of Spring JUnit [test utilities][spring-testing]. The only difference to a standard Spring test is the use of the Job Launcher, which is needed to launch a job.
 
     @ContextConfiguration(locations = {"classpath*:spring/batch/job/hello-world-job.xml"})
     @RunWith(SpringJUnit4ClassRunner.class)
@@ -298,6 +298,8 @@ If you work without a build manager you can download all needed libraries from [
 [first-introduction]: http://forum.springsource.org/showthread.php?38417-Spring-Batch-Announcement "first Spring Batch announcement from 2007"
 [gradle]: http://www.gradle.org/ "Gradle official home page"
 [github-repo]: https://github.com/langmi/spring-batch-tutorials "My Github Repository for Spring Batch Tutorials Sources"
+[job-launcher]: http://static.springsource.org/spring-batch/reference/html/domain.html#domainJobLauncher
+[job-repository]: http://static.springsource.org/spring-batch/reference/html/domain.html#domainJobRepository
 [junit]: http://www.junit.org/
 [hello-world]: http://en.wikipedia.org/wiki/Hello_world_program "Wikipedia: Hello World Programm"
 [maven]: http://maven.apache.org/index.html "Maven official home page"
@@ -311,5 +313,6 @@ If you work without a build manager you can download all needed libraries from [
 [spring-batch-domain-concepts]: http://static.springsource.org/spring-batch/reference/html/domain.html
 [spring-batch-downloads]: http://static.springsource.org/spring-batch/downloads.html
 [spring-batch-tutorial-hello-world-logo]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-tutorial-hello-world-logo.png
+[spring-testing]: http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/html/testing.html
 [tasklet-step]: http://static.springsource.org/spring-batch/reference/html/configureStep.html#taskletStep
 [wikipedia-batch-processing]: http://en.wikipedia.org/wiki/Batch_processing
