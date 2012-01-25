@@ -38,8 +38,7 @@ public class HelloWorldTaskletTest {
     @Test
     public void testExecute() throws Exception {
         assertEquals(RepeatStatus.FINISHED, tasklet.execute(null, null));
-        // the \n is important, because .println is used
-        assertEquals("Hello World!\n", outContent.toString());
+        assertEquals("Hello World!", outContent.toString());
     }
 
     @Before

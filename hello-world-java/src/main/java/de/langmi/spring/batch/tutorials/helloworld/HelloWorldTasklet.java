@@ -38,7 +38,9 @@ public class HelloWorldTasklet implements Tasklet {
     public RepeatStatus execute(StepContribution contribution, 
                                 ChunkContext chunkContext) throws Exception {
 
-        System.out.println("Hello World!");
+        // why not using println? because it makes testing harder, *nix and
+        // windows think different about new line as in \n vs \r\n
+        System.out.print("Hello World!");
 
         return RepeatStatus.FINISHED;
     }

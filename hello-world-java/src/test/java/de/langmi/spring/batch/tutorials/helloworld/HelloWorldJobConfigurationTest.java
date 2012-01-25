@@ -56,8 +56,8 @@ public class HelloWorldJobConfigurationTest {
         // assert job run status
         assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
 
-        // the \n is important, because .println is used
-        assertEquals("Hello World!\n", outContent.toString());
+        // assert sysoutput
+        assertEquals("Hello World!", outContent.toString());
     }
 
     @Before

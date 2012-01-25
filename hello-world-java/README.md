@@ -66,7 +66,7 @@ To keep this tutorial simple we use a table-less Job Repository and a dummy tran
     <bean id="jobLauncher" 
           class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
           p:jobRepository-ref="jobRepository" />
-	
+    
     <bean id="jobRepository" 
           class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"
           p:transactionManager-ref="transactionManager" />
@@ -157,7 +157,9 @@ In the Job configuration we configured a Tasklet Step, here is the missing sourc
         public RepeatStatus execute(StepContribution contribution, 
                                     ChunkContext chunkContext) throws Exception {
     
-            System.out.println("Hello World!");
+            // why not using println? because it makes testing harder, *nix and
+            // windows think different about new line as in \n vs \r\n    
+            System.out.print("Hello World!");
     
             return RepeatStatus.FINISHED;
         }
@@ -179,8 +181,7 @@ The Tasklet implementation is pure Java, so we can test it as that with [JUnit][
         @Test
         public void testExecute() throws Exception {
             tasklet.execute(null, null);
-            // the \n is important, because .println is used inside the tasklet implementation
-            assertEquals("Hello World!\n", outContent.toString());
+            assertEquals("Hello World!", outContent.toString());
         }
     
         @Before
@@ -219,8 +220,8 @@ To test the complete Job we can use a lot of Spring JUnit [test utilities][sprin
             // assert job run status
             assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
     
-            // the \n is important, because .println is used
-            assertEquals("Hello World!\n", outContent.toString());
+            // assert sysoutput
+            assertEquals("Hello World!", outContent.toString());
         }
     
         @Before
@@ -266,10 +267,10 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 ## Meta
 
 * tested with:
-	* Java 1.6
-	* Maven 3
-	* [Spring Batch][spring-batch] 2.1.8.RELEASE
-	* [Spring Framework(core)][spring-core] 3.1.0.RELEASE
+    * Java 1.6
+    * Maven 3
+    * [Spring Batch][spring-batch] 2.1.8.RELEASE
+    * [Spring Framework(core)][spring-core] 3.1.0.RELEASE
 * used IDE: primarily programmed with [Netbeans][netbeans] 7.0
 * license: [Apache 2.0 License][apache-license]
 
