@@ -32,7 +32,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * JobConfigurationTest, it loads the Spring Batch Job definition and runs
+ * JobConfigurationTest, loads the Spring Batch Job definition and runs
  * the configured job.
  *
  * @author Michael R. Lange <michael.r.lange@langmi.de> 

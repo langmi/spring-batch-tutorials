@@ -88,7 +88,7 @@ The *Job* definition - for this tutorial - is quite short:
     <bean id="helloWorldTasklet" 
           class="de.langmi.spring.batch.tutorials.helloworld.HelloWorldTasklet" />
 
-In contrast to the introduction of the basic concepts, we use a so called [Tasklet Step][tasklet-step], without the standard Reader, Processor and Writer.. A *Tasklet Step* bypasses the standard Step concept and makes it possible to just implement one method, like printing out *Hello World!*. 
+In contrast to the introduction of the basic concepts, we use a so called [Tasklet Step][tasklet-step], without the standard Reader, Processor and Writer. A *Tasklet Step* bypasses the standard Step concept and makes it possible to implement just one method, like printing out *Hello World!*. 
 
 #### Complete XML
 
@@ -169,6 +169,8 @@ And that's it, yes really that and the configuration is a complete Spring Batch.
 
 ## Testing
 
+Before the batch <del>escapes</del> will be released it needs some tests.
+
 ### Testing The Tasklet Step
 
 The Tasklet implementation is pure Java, so we can test it as that with [JUnit][junit]:
@@ -237,13 +239,21 @@ To test the complete Job we can use a lot of Spring JUnit [test utilities][sprin
         }
     }
 
+This test is essentially an integration test.
+
 ## Run The Spring Batch Job
 
-### Run Batch Job, Run!
+To run a Spring Batch Job one can use [Spring Batch Admin][spring-batch-admin], to keep this tutorial simple we will use the standard Java [Main-Class][main-class] concept with an executable jar.
 
-#### Mainclass (from within IDE)
+### Which Main Class ?
 
-using the Maven exec plugin with 
+The nice thing about Spring frameworks is, right when you need a ready-to-use implementation, the framework has it. We need a Main Class which can be configured easily and starts the job, here it is: [CommandLineJobRunner][CommandLineJobRunner].
+
+### Executable JAR
+
+To show all possible ways (read: tool configurations) to create an executable JAR is out of scope for this tutorial. But for Maven there is a configuration for the [maven-shade Plugin][maven-shade-plugin] in the pom.xml.
+
+### Using CommandLineJobRunner In An All-One-J
 
 `mvn clean install exec:java -Dexec.mainClass=org.springframework.batch.core.launch.support.CommandLineJobRunner -Dexec.args="spring/batch/job/hello-world-job.xml helloWorldJob"`
 
@@ -254,10 +264,6 @@ executing the _-executable.jar_ from the command line:
 `java -jar hello-world-java-1.0-SNAPSHOT-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob`
 
 #### Complete Runtime
-
-#### Web Archive
-
-
 
 
 ## Did you know?
@@ -296,6 +302,7 @@ If you work without a build manager you can download all needed libraries from [
 [changes-1-to-2]: http://static.springsource.org/spring-batch/trunk/migration/2.0-highlights.html "Changes from Spring Batch 1.x to 2.0"
 [chunk-oriented-processing-news]: http://static.springsource.org/spring-batch/reference/html/whatsNew.html#whatsNewChunkOrientedProcessing
 [chunk-oriented-processing]: http://static.springsource.org/spring-batch/reference/html/configureStep.html#chunkOrientedProcessing
+[CommandLineJobRunner]: http://static.springsource.org/spring-batch/apidocs/org/springframework/batch/core/launch/support/CommandLineJobRunner.html
 [first-introduction]: http://forum.springsource.org/showthread.php?38417-Spring-Batch-Announcement "first Spring Batch announcement from 2007"
 [gradle]: http://www.gradle.org/ "Gradle official home page"
 [github-repo]: https://github.com/langmi/spring-batch-tutorials "My Github Repository for Spring Batch Tutorials Sources"
@@ -303,14 +310,17 @@ If you work without a build manager you can download all needed libraries from [
 [job-repository]: http://static.springsource.org/spring-batch/reference/html/domain.html#domainJobRepository
 [junit]: http://www.junit.org/
 [hello-world]: http://en.wikipedia.org/wiki/Hello_world_program "Wikipedia: Hello World Programm"
+[main-class]:http://docs.oracle.com/javase/tutorial/deployment/jar/appman.html
 [maven]: http://maven.apache.org/index.html "Maven official home page"
-[pom-xml]: http://foo.com
+[maven-shade-plugin]: http://maven.apache.org/plugins/maven-shade-plugin/
+[pom-xml]: http://maven.apache.org/guides/introduction/introduction-to-the-pom.html
 [springsource]: http://www.springsource.com/ "Springsource official home page"
 [spring-batch]: http://static.springsource.org/spring-batch/  "Spring Batch official home page"
 [spring-batch-concept-chunk]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-concept-chunk.png
 [spring-batch-concept-job]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-concept-job.png
 [spring-batch-concept-step]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-concept-step.png
 [spring-core]: http://www.springsource.org/spring-core/ "Spring Core Framework official home page"
+[spring-batch-admin]: http://static.springsource.org/spring-batch-admin/getting-started.html
 [spring-batch-domain-concepts]: http://static.springsource.org/spring-batch/reference/html/domain.html
 [spring-batch-downloads]: http://static.springsource.org/spring-batch/downloads.html
 [spring-batch-tutorial-hello-world-logo]: https://github.com/langmi/spring-batch-tutorials/raw/master/hello-world-java/spring-batch-tutorial-hello-world-logo.png

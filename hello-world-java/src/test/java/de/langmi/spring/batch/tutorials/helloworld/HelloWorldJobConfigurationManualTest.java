@@ -15,31 +15,43 @@
  */
 package de.langmi.spring.batch.tutorials.helloworld;
 
-import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.batch.core.BatchStatus;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
- * Simple test for {@link HelloWorldTasklet}.
+ * Testing a Spring Batch without any Spring utilities.
  *
  * @author Michael R. Lange <michael.r.lange@langmi.de>
- * @see http://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
  */
-public class HelloWorldTaskletTest {
+public class HelloWorldJobConfigurationManualTest {
 
     /** Stream for catching System.out. */
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final Tasklet tasklet = new HelloWorldTasklet();
 
     @Test
-    public void testExecute() throws Exception {
-        assertEquals(RepeatStatus.FINISHED, tasklet.execute(null, null));
-        // assert sysoutput
+    public void testLaunch() throws Exception {
+        // load ApplicationContext
+        ApplicationContext context = new FileSystemXmlApplicationContext("src/main/resources/spring/batch/job/hello-world-job.xml");
+        // get job
+        Job job = context.getBean(Job.class);
+        // get job launcher
+        JobLauncher jobLauncher = context.getBean(JobLauncher.class);
+        // start job
+        JobExecution jobExecution = jobLauncher.run(job, new JobParameters());
+        // assertion
+        assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
+        // assert sysoutput        
         assertEquals("Hello World!", outContent.toString());
     }
 
