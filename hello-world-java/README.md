@@ -201,7 +201,7 @@ The Tasklet implementation is pure Java, so we can test it as that with [JUnit][
 
 ### Testing Complete Job
 
-To test the complete Job we can use a lot of Spring JUnit [test utilities][spring-testing]. The only difference to a standard Spring test is the use of the Job Launcher, which is needed to launch a job.
+To test the complete Job we can use a lot of the Spring JUnit [test utilities][spring-testing]. The only difference to a standard Spring test is the use of the Job Launcher, which is needed to launch a job.
 
     @ContextConfiguration(locations = {"classpath*:spring/batch/job/hello-world-job.xml"})
     @RunWith(SpringJUnit4ClassRunner.class)
@@ -243,30 +243,27 @@ This test is essentially an integration test.
 
 ## Run The Spring Batch Job
 
-To run a Spring Batch Job one can use [Spring Batch Admin][spring-batch-admin], to keep this tutorial simple we will use the standard Java [Main-Class][main-class] concept with an executable jar.
+To run a Spring Batch Job one can use [Spring Batch Admin][spring-batch-admin], which is really out of scope for this tutorial, so we will use the standard Java [Main-Class][main-class] concept with an executable [JAR][jar].
 
 ### Which Main Class ?
 
-The nice thing about Spring frameworks is, right when you need a ready-to-use implementation, the framework has it. We need a Main Class which can be configured easily and starts the job, here it is: [CommandLineJobRunner][CommandLineJobRunner].
+The nice thing about Spring frameworks is, right when you need a ready-to-use implementation, the framework has it. We need a Main Class, which can be configured easily and starts the job, here it is: [CommandLineJobRunner][CommandLineJobRunner].
 
-### Executable JAR
+The only thing left is an executable JAR, to create one the pom.xml from the tutorial sources has a configuration for the [Maven-shade Plugin][maven-shade-plugin]. To use it just run the usual: `mvn clean install` and there will be an `hello-world-java-1.0-executable.jar` ready for use.
+ 
+### Run It!
 
-To show all possible ways (read: tool configurations) to create an executable JAR is out of scope for this tutorial. But for Maven there is a configuration for the [maven-shade Plugin][maven-shade-plugin] in the pom.xml.
+It's about time to end this tutorial, so here is the code to run the job:
 
-### Using CommandLineJobRunner In An All-One-J
+`java -jar hello-world-java-1.0-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob`
 
-`mvn clean install exec:java -Dexec.mainClass=org.springframework.batch.core.launch.support.CommandLineJobRunner -Dexec.args="spring/batch/job/hello-world-job.xml helloWorldJob"`
+If all worked well, you see now a friendly `Hello World!`.
 
-#### All-One-Jar
+## Conclusion
 
-executing the _-executable.jar_ from the command line:
+By following this tutorial you learned some Spring Batch basic concepts and built a simple *Hello World!* program. The next tutorials will cover more advanced concepts like *Read, Process, Write* or *Logging*.
 
-`java -jar hello-world-java-1.0-SNAPSHOT-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob`
-
-#### Complete Runtime
-
-
-## Did you know?
+### Did you know?
 
 Spring Batch was first [introduced][first-introduction] in 2007. Back then the framework was created by Interface21 - now known as [Springsource][springsource] - and [Accenture][accenture]. It has seen only 2 major versions so far, but the [transition from version 1 to 2][changes-1-to-2] included a massive refactoring of the core concepts. In fact the chunk oriented processing concept was first introduced with Spring Batch version 2.
 
@@ -280,10 +277,9 @@ Spring Batch was first [introduced][first-introduction] in 2007. Back then the f
 * used IDE: primarily programmed with [Netbeans][netbeans] 7.0
 * license: [Apache 2.0 License][apache-license]
 
-
 ### Maven, Buildr, Gradle and Friends
 
-To keep it simple i provided some build manager configurations for:
+I provided some build manager configurations for:
 
 * [Buildr][buildr] - see [buildfile][buildfile], tested with Buildr 1.4.6
 * [Gradle][gradle] - see [build.gradle][build-gradle], tested with Gradle 1.0-milestone-5
@@ -306,6 +302,7 @@ If you work without a build manager you can download all needed libraries from [
 [first-introduction]: http://forum.springsource.org/showthread.php?38417-Spring-Batch-Announcement "first Spring Batch announcement from 2007"
 [gradle]: http://www.gradle.org/ "Gradle official home page"
 [github-repo]: https://github.com/langmi/spring-batch-tutorials "My Github Repository for Spring Batch Tutorials Sources"
+[jar]: http://en.wikipedia.org/wiki/JAR_(file_format)
 [job-launcher]: http://static.springsource.org/spring-batch/reference/html/domain.html#domainJobLauncher
 [job-repository]: http://static.springsource.org/spring-batch/reference/html/domain.html#domainJobRepository
 [junit]: http://www.junit.org/

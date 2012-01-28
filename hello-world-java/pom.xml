@@ -21,7 +21,7 @@
 
     <groupId>de.langmi.spring.batch.tutorials</groupId>
     <artifactId>hello-world-java</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>hello-world-java</name>
@@ -130,7 +130,7 @@
                      
                      usage:
                      cd to <project>/target
-                     java -jar hello-world-java-1.0-SNAPSHOT-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob
+                     java -jar hello-world-java-1.0-executable.jar spring/batch/job/hello-world-job.xml helloWorldJob
                      -->                     
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>1.5</version>
@@ -197,7 +197,7 @@
         <!-- Spring (core) Framework dependencies -->
         <!-- references version property 
              <spring.framework.version>3.0.6.RELEASE</spring.framework.version> 
-             just replace ${spring.framework.version} with 3.0.6.RELEASE 
+             just replace ${spring.framework.version} with 3.1.0.RELEASE 
              if you don't want to use properties -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -211,7 +211,7 @@
         </dependency>
         <dependency>
             <!-- spring-jdbc specified, because spring-batch has
-             older 2.5.6 version configured, but we want the newer 3.0.6 here -->
+             older 2.5.6 version configured, but we want the newer 3.1.0 here -->
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.framework.version}</version>
