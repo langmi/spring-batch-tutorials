@@ -15,12 +15,12 @@
  */
 package de.langmi.spring.batch.tutorials.helloworld;
 
-import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.After;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 
@@ -28,7 +28,7 @@ import org.springframework.batch.repeat.RepeatStatus;
  * Simple test for {@link HelloWorldTasklet}.
  *
  * @author Michael R. Lange <michael.r.lange@langmi.de>
- * @see http://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
+ * @see <a href="http://stackoverflow.com/questions/1119385/junit-test-for-system-out-println">JUnit test for system.out.println</a>
  */
 public class HelloWorldTaskletTest {
 
